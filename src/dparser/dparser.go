@@ -46,7 +46,7 @@ func (dp DParser) stringToDate(inp tDate) (tim time.Time) {
 func (dp *DParser) calcDiff() {
 	diff := dp.Date2.Date.Sub(dp.Date1.Date)
 	dp.Diff.NanoSeconds = diff.Nanoseconds()
-	dp.Diff.Seconds = diff.Seconds() / 24
+	dp.Diff.Seconds = diff.Seconds()
 	dp.Diff.Minutes = dp.Diff.Seconds / 60
 	dp.Diff.Hours = dp.Diff.Seconds / 3600
 	dp.Diff.Days = dp.Diff.Seconds / 86400
