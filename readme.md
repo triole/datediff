@@ -31,6 +31,12 @@ $ datediff -j 2022-10-01 2022-10-15
 }
 ```
 
+$ datediff now 2022-12-31
+
+```go mdox-exec="r now 2022-12-31"
+1874h41m26.921511344s
+```
+
 ## Help
 
 ```go mdox-exec="r -h"
