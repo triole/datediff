@@ -15,20 +15,31 @@ type tDiff struct {
 }
 
 func (dp *DParser) Parse() {
-	now := dp.now(nil)
+	now := dp.timeToParserDate(dp.now(), nil)
 	for i := 0; i <= len(dp.Output.Dates)-1; i++ {
-		if dp.Output.Dates[i].String == "" || dp.Output.Dates[i].String == "now" {
+		switch dp.Output.Dates[i].String {
+		case "now":
 			dp.Output.Dates[i] = now
-		} else {
+		case "yesterday":
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.yesterday(), nil)
+		case "today":
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.today(), nil)
+		case "tomorrow":
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.tomorrow(), nil)
+		default:
 			dp.Output.Dates[i].Layout = dp.detectLayout(dp.Output.Dates[i].String)
 			if dp.Output.Dates[i].Layout == "01-02" {
 				dp.Output.Dates[i].Layout = "2006-01-02"
-				dp.Output.Dates[i].String = dp.now("2006").String + "-" + dp.Output.Dates[i].String
+				dp.Output.Dates[i].String = dp.timeToParserDate(
+					dp.now(), "2006",
+				).String + "-" + dp.Output.Dates[i].String
 			}
 			dp.Output.Dates[i].Date = dp.stringToDate(dp.Output.Dates[i])
 		}
 	}
-	dp.calcDiff(0)
+	dp.Output.Diff = dp.calcDiff(
+		dp.Output.Dates[0].Date, dp.Output.Dates[1].Date,
+	)
 }
 
 func (dp DParser) stringToDate(inp tDate) (tim time.Time) {
@@ -42,12 +53,14 @@ func (dp DParser) stringToDate(inp tDate) (tim time.Time) {
 	return
 }
 
-func (dp *DParser) calcDiff(i int) {
-	diff := dp.Output.Dates[i+1].Date.Sub(dp.Output.Dates[i].Date)
-	dp.Output.Diff.NanoSeconds = diff.Nanoseconds()
-	dp.Output.Diff.Seconds = diff.Seconds()
-	dp.Output.Diff.Minutes = dp.Output.Diff.Seconds / 60
-	dp.Output.Diff.Hours = dp.Output.Diff.Seconds / 3600
-	dp.Output.Diff.Days = dp.Output.Diff.Seconds / 86400
-	dp.Output.Diff.Readable = diff.String()
+func (dp DParser) timeToParserDate(tim time.Time, lt interface{}) (d tDate) {
+	layout := "2006-01-02T15:04:05"
+	switch lt.(type) {
+	case string:
+		layout = lt.(string)
+	}
+	d.Date = tim
+	d.Layout = layout
+	d.String = tim.Format(layout)
+	return
 }

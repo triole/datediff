@@ -20,8 +20,8 @@ var (
 )
 
 var CLI struct {
-	Date1       string `help:"date1" arg optional`
-	Date2       string `help:"date2" arg optional`
+	Date1       string `help:"date1, default 'now'" arg optional default:now`
+	Date2       string `help:"date2, default 'tomorrow'" arg optional default:tomorrow`
 	JSON        bool   `help:"print diff output in json format" short:j`
 	TOML        bool   `help:"print diff output as toml" short:t`
 	Formats     bool   `help:"list supported date formats" short:l`
