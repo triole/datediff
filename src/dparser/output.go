@@ -37,17 +37,32 @@ func (dp DParser) printTOML(obj interface{}) {
 func (dp DParser) PrintShort(format string) {
 	switch format {
 	case "readable":
-		fmt.Printf("%s\n", dp.Output.Diff.Readable)
+		dp.printVal(dp.Output.Diff.Readable)
 	case "nano":
-		fmt.Printf("%d\n", dp.Output.Diff.NanoSeconds)
+		dp.printVal(dp.Output.Diff.NanoSeconds)
 	case "sec":
-		fmt.Printf("%f\n", dp.Output.Diff.Seconds)
+		dp.printVal(dp.Output.Diff.Seconds)
 	case "min":
-		fmt.Printf("%f\n", dp.Output.Diff.Minutes)
+		dp.printVal(dp.Output.Diff.Minutes)
 	case "hours":
-		fmt.Printf("%f\n", dp.Output.Diff.Hours)
+		dp.printVal(dp.Output.Diff.Hours)
 	case "days":
-		fmt.Printf("%f\n", dp.Output.Diff.Days)
+		dp.printVal(dp.Output.Diff.Days)
+	}
+}
+
+func (dp DParser) printVal(itf interface{}) {
+	switch val := itf.(type) {
+	case int:
+		fmt.Printf("%d\n", val)
+	case float64:
+		if dp.Round == 0 {
+			fmt.Printf("%d\n", int(val))
+		} else {
+			fmt.Printf("%f\n", val)
+		}
+	default:
+		fmt.Printf("%s\n", val)
 	}
 }
 
