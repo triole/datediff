@@ -17,13 +17,13 @@ type tDiff struct {
 func (dp *DParser) Parse() {
 	now := dp.now(nil)
 	for i := 0; i <= len(dp.Output.Dates)-1; i++ {
-		if dp.Output.Dates[i].DateString == "" || dp.Output.Dates[i].DateString == "now" {
+		if dp.Output.Dates[i].String == "" || dp.Output.Dates[i].String == "now" {
 			dp.Output.Dates[i] = now
 		} else {
-			dp.Output.Dates[i].Layout = dp.detectLayout(dp.Output.Dates[i].DateString)
+			dp.Output.Dates[i].Layout = dp.detectLayout(dp.Output.Dates[i].String)
 			if dp.Output.Dates[i].Layout == "01-02" {
 				dp.Output.Dates[i].Layout = "2006-01-02"
-				dp.Output.Dates[i].DateString = dp.now("2006").DateString + "-" + dp.Output.Dates[i].DateString
+				dp.Output.Dates[i].String = dp.now("2006").String + "-" + dp.Output.Dates[i].String
 			}
 			dp.Output.Dates[i].Date = dp.stringToDate(dp.Output.Dates[i])
 		}
@@ -34,7 +34,7 @@ func (dp *DParser) Parse() {
 func (dp DParser) stringToDate(inp tDate) (tim time.Time) {
 	var err error
 	tim, err = time.ParseInLocation(
-		inp.Layout, inp.DateString, time.Local,
+		inp.Layout, inp.String, time.Local,
 	)
 	if err != nil {
 		log.Fatal(err)

@@ -8,7 +8,7 @@ import (
 func main() {
 	parseArgs()
 
-	dp := dparser.Init(CLI.Date1, CLI.Date2)
+	dp := dparser.Init(CLI.Date1, CLI.Date2, CLI.TOML)
 
 	if CLI.Formats == true {
 		dp.ListSupportedFormats()
@@ -17,14 +17,14 @@ func main() {
 		dp.Parse()
 
 		if CLI.Verbose == true {
-			dp.PrintJSON(dp.Output)
+			dp.Print(dp.Output)
+		} else {
+			if CLI.JSON == true || CLI.TOML == true {
+				dp.Print(dp.Output.Diff)
+			}
 		}
 
-		if CLI.JSON == true && CLI.Verbose == false {
-			dp.PrintJSON(dp.Output.Diff)
-		}
-
-		if CLI.JSON == false && CLI.Verbose == false {
+		if CLI.Verbose == false && CLI.JSON == false && CLI.TOML == false {
 			fmt.Printf("%s\n", dp.Output.Diff.Readable)
 		}
 	}

@@ -7,14 +7,31 @@ import (
 	"os"
 
 	"github.com/jedib0t/go-pretty/table"
+	toml "github.com/pelletier/go-toml/v2"
 )
 
-func (dp DParser) PrintJSON(obj interface{}) {
+func (dp DParser) Print(obj interface{}) {
+	if dp.TOML == true {
+		dp.printTOML(obj)
+	} else {
+		dp.printJSON(obj)
+	}
+}
+
+func (dp DParser) printJSON(obj interface{}) {
 	json, err := json.MarshalIndent(obj, "", "   ")
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
 	fmt.Println(string(json))
+}
+
+func (dp DParser) printTOML(obj interface{}) {
+	toml, err := toml.Marshal(obj)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+	fmt.Println(string(toml))
 }
 
 func (dp DParser) ListSupportedFormats() {

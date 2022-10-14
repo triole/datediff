@@ -23,8 +23,9 @@ var CLI struct {
 	Date1       string `help:"date1" arg optional`
 	Date2       string `help:"date2" arg optional`
 	JSON        bool   `help:"print diff output in json format" short:j`
+	TOML        bool   `help:"print diff output as toml" short:t`
 	Formats     bool   `help:"list supported date formats" short:l`
-	Verbose     bool   `help:"verbose mode" short:v`
+	Verbose     bool   `help:"verbose mode, default format is json, use -t to switch" short:v`
 	VersionFlag bool   `help:"display version" short:V`
 }
 

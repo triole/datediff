@@ -19,6 +19,7 @@ type DParser struct {
 	TimeZoneLocation *time.Location
 	DiffObj          time.Duration
 	Layouts          tLayouts
+	TOML             bool
 }
 
 type tOutput struct {
@@ -30,12 +31,12 @@ type tOutput struct {
 type tDates []tDate
 
 type tDate struct {
-	DateString string    `json:"string"`
-	Layout     string    `json:"layout"`
-	Date       time.Time `json:"date"`
+	String string    `json:"string"`
+	Layout string    `json:"layout"`
+	Date   time.Time `json:"date"`
 }
 
-func Init(date1, date2 string) (dp DParser) {
+func Init(date1, date2 string, toml bool) (dp DParser) {
 	dp.Output.Dates = addDateString(date1, dp.Output.Dates)
 	dp.Output.Dates = addDateString(date2, dp.Output.Dates)
 	zone, err := timezone.Name()
@@ -53,13 +54,12 @@ func Init(date1, date2 string) (dp DParser) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	dp.TOML = toml
 	return
 }
 
 func addDateString(str string, tdates tDates) tDates {
-	td := tDate{
-		DateString: str,
-	}
+	td := tDate{String: str}
 	tdates = append(tdates, td)
 	return tdates
 }

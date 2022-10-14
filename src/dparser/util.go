@@ -22,7 +22,7 @@ func (dp DParser) now(lt interface{}) (d tDate) {
 	now := time.Now().UTC().In(dp.TimeZoneLocation)
 	d.Date = now
 	d.Layout = layout
-	d.DateString = now.Format(layout)
+	d.String = now.Format(layout)
 	return
 }
 

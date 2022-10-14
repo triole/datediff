@@ -13,7 +13,7 @@ func TestDetectLayout(t *testing.T) {
 }
 
 func assertDetectLayout(input, exp string, t *testing.T) {
-	dp := Init(input, "")
+	dp := Init(input, "", false)
 	dp.Parse()
 	if dp.detectLayout(input) != exp {
 		t.Errorf("Fail DetectLayout: %s != %s", input, exp)
