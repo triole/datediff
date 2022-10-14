@@ -16,8 +16,8 @@ func (dp DParser) PrintDiffJSON() {
 
 func (dp DParser) ListSupportedFormats() {
 	fmt.Printf("\nThe following date layouts are supported\n\n")
-	for _, el := range dp.layoutDefinitions() {
-		fmt.Printf("%22s |%s\n", el.Layout, el.Descriptor)
+	for _, el := range dp.Layouts {
+		fmt.Printf("%22s |%s\n", el.Layout, el.Matcher)
 	}
 	fmt.Printf("\n")
 }

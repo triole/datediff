@@ -1,10 +1,17 @@
 package dparser
 
 import (
+	_ "embed"
+	"encoding/json"
 	"log"
 	"time"
 
 	timezone "github.com/gandarez/go-olson-timezone"
+)
+
+var (
+	//go:embed embed/layouts.json
+	layouts []byte
 )
 
 type DParser struct {
@@ -13,6 +20,7 @@ type DParser struct {
 	Diff          tDiff
 	DiffObj       time.Duration
 	LocalTimeZone string
+	Layouts       tLayouts
 }
 
 type tDate struct {
@@ -29,5 +37,9 @@ func Init(date1, date2 string) (dp DParser) {
 		log.Fatal(err)
 	}
 	dp.LocalTimeZone = zone
+	err = json.Unmarshal(layouts, &dp.Layouts)
+	if err != nil {
+		log.Fatal(err)
+	}
 	return
 }
