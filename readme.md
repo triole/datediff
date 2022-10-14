@@ -22,19 +22,19 @@ $ datediff -j 2022-10-01 2022-10-15
 
 ```go mdox-exec="r -j 2022-10-01 2022-10-15"
 {
-   "NanoSeconds": 1209600000000000,
-   "Seconds": 1209600,
-   "Minutes": 20160,
-   "Hours": 336,
-   "Days": 14,
-   "Readable": "336h0m0s"
+   "nanoseconds": 1209600000000000,
+   "seconds": 1209600,
+   "minutes": 20160,
+   "hours": 336,
+   "days": 14,
+   "readable": "336h0m0s"
 }
 ```
 
 $ datediff now 2022-12-31
 
 ```go mdox-exec="r now 2022-12-31"
-1874h41m26.921511344s
+1860h38m22.907380087s
 ```
 
 ## Help
@@ -50,6 +50,8 @@ Arguments:
 Flags:
   -h, --help            Show context-sensitive help.
   -j, --json            print diff output in json format
+  -t, --toml            print diff output as toml
   -l, --formats         list supported date formats
+  -v, --verbose         verbose mode, default format is json, use -t to switch
   -V, --version-flag    display version
 ```
