@@ -6,30 +6,29 @@ import (
 )
 
 type tDiff struct {
-	NanoSeconds int64
-	Seconds     float64
-	Minutes     float64
-	Hours       float64
-	Days        float64
-	Readable    string
+	NanoSeconds int64   `json:"nanoseconds"`
+	Seconds     float64 `json:"seconds"`
+	Minutes     float64 `json:"minutes"`
+	Hours       float64 `json:"hours"`
+	Days        float64 `json:"days"`
+	Readable    string  `json:"readable"`
 }
 
 func (dp *DParser) Parse() {
-	now := dp.now()
-	if dp.Date1.DateString == "" || dp.Date1.DateString == "now" {
-		dp.Date1 = now
-	} else {
-		dp.Date1.Layout = dp.detectLayout(dp.Date1.DateString)
-		dp.Date1.Date = dp.stringToDate(dp.Date1)
+	now := dp.now(nil)
+	for i := 0; i <= len(dp.Output.Dates)-1; i++ {
+		if dp.Output.Dates[i].DateString == "" || dp.Output.Dates[i].DateString == "now" {
+			dp.Output.Dates[i] = now
+		} else {
+			dp.Output.Dates[i].Layout = dp.detectLayout(dp.Output.Dates[i].DateString)
+			if dp.Output.Dates[i].Layout == "01-02" {
+				dp.Output.Dates[i].Layout = "2006-01-02"
+				dp.Output.Dates[i].DateString = dp.now("2006").DateString + "-" + dp.Output.Dates[i].DateString
+			}
+			dp.Output.Dates[i].Date = dp.stringToDate(dp.Output.Dates[i])
+		}
 	}
-
-	if dp.Date2.DateString == "" || dp.Date2.DateString == "now" {
-		dp.Date2 = now
-	} else {
-		dp.Date2.Layout = dp.detectLayout(dp.Date2.DateString)
-		dp.Date2.Date = dp.stringToDate(dp.Date2)
-	}
-	dp.calcDiff()
+	dp.calcDiff(0)
 }
 
 func (dp DParser) stringToDate(inp tDate) (tim time.Time) {
@@ -43,12 +42,12 @@ func (dp DParser) stringToDate(inp tDate) (tim time.Time) {
 	return
 }
 
-func (dp *DParser) calcDiff() {
-	diff := dp.Date2.Date.Sub(dp.Date1.Date)
-	dp.Diff.NanoSeconds = diff.Nanoseconds()
-	dp.Diff.Seconds = diff.Seconds()
-	dp.Diff.Minutes = dp.Diff.Seconds / 60
-	dp.Diff.Hours = dp.Diff.Seconds / 3600
-	dp.Diff.Days = dp.Diff.Seconds / 86400
-	dp.Diff.Readable = diff.String()
+func (dp *DParser) calcDiff(i int) {
+	diff := dp.Output.Dates[i+1].Date.Sub(dp.Output.Dates[i].Date)
+	dp.Output.Diff.NanoSeconds = diff.Nanoseconds()
+	dp.Output.Diff.Seconds = diff.Seconds()
+	dp.Output.Diff.Minutes = dp.Output.Diff.Seconds / 60
+	dp.Output.Diff.Hours = dp.Output.Diff.Seconds / 3600
+	dp.Output.Diff.Days = dp.Output.Diff.Seconds / 86400
+	dp.Output.Diff.Readable = diff.String()
 }

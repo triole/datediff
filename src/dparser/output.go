@@ -9,8 +9,8 @@ import (
 	"github.com/jedib0t/go-pretty/table"
 )
 
-func (dp DParser) PrintDiffJSON() {
-	json, err := json.MarshalIndent(dp.Diff, "", "   ")
+func (dp DParser) PrintJSON(obj interface{}) {
+	json, err := json.MarshalIndent(obj, "", "   ")
 	if err != nil {
 		log.Fatalf(err.Error())
 	}

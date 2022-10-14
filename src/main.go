@@ -16,11 +16,16 @@ func main() {
 
 		dp.Parse()
 
-		if CLI.JSON == true {
-			dp.PrintDiffJSON()
-		} else {
-			fmt.Printf("%s\n", dp.Diff.Readable)
+		if CLI.Verbose == true {
+			dp.PrintJSON(dp.Output)
 		}
 
+		if CLI.JSON == true && CLI.Verbose == false {
+			dp.PrintJSON(dp.Output.Diff)
+		}
+
+		if CLI.JSON == false && CLI.Verbose == false {
+			fmt.Printf("%s\n", dp.Output.Diff.Readable)
+		}
 	}
 }

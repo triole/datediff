@@ -15,31 +15,51 @@ var (
 )
 
 type DParser struct {
-	Date1         tDate
-	Date2         tDate
-	Diff          tDiff
-	DiffObj       time.Duration
-	LocalTimeZone string
-	Layouts       tLayouts
+	Output           tOutput
+	TimeZoneLocation *time.Location
+	DiffObj          time.Duration
+	Layouts          tLayouts
 }
 
+type tOutput struct {
+	LocalTimeZone string `json:"local_timezone"`
+	Dates         tDates `json:"dates"`
+	Diff          tDiff  `json:"diff"`
+}
+
+type tDates []tDate
+
 type tDate struct {
-	DateString string
-	Layout     string
-	Date       time.Time
+	DateString string    `json:"string"`
+	Layout     string    `json:"layout"`
+	Date       time.Time `json:"date"`
 }
 
 func Init(date1, date2 string) (dp DParser) {
-	dp.Date1.DateString = date1
-	dp.Date2.DateString = date2
+	dp.Output.Dates = addDateString(date1, dp.Output.Dates)
+	dp.Output.Dates = addDateString(date2, dp.Output.Dates)
 	zone, err := timezone.Name()
 	if err != nil {
 		log.Fatal(err)
 	}
-	dp.LocalTimeZone = zone
+	dp.Output.LocalTimeZone = zone
+	var loc *time.Location
+	loc, err = time.LoadLocation(dp.Output.LocalTimeZone)
+	if err != nil {
+		log.Fatal(err)
+	}
+	dp.TimeZoneLocation = loc
 	err = json.Unmarshal(layouts, &dp.Layouts)
 	if err != nil {
 		log.Fatal(err)
 	}
 	return
+}
+
+func addDateString(str string, tdates tDates) tDates {
+	td := tDate{
+		DateString: str,
+	}
+	tdates = append(tdates, td)
+	return tdates
 }

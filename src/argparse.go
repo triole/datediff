@@ -24,6 +24,7 @@ var CLI struct {
 	Date2       string `help:"date2" arg optional`
 	JSON        bool   `help:"print diff output in json format" short:j`
 	Formats     bool   `help:"list supported date formats" short:l`
+	Verbose     bool   `help:"verbose mode" short:v`
 	VersionFlag bool   `help:"display version" short:V`
 }
 
