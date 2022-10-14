@@ -3,8 +3,8 @@
 <!--- mdtoc: toc begin -->
 
 1. [Synopsis](#synopsis)
-2. [Examples](#examples)
-3. [Help](#help)<!--- mdtoc: toc end -->
+1. [Examples](#examples)
+1. [Help](#help)<!--- mdtoc: toc end -->
 
 ## Synopsis
 
@@ -59,3 +59,4 @@ Flags:
   -v, --verbose         verbose mode, default format is json, use -t to switch
   -V, --version-flag    display version
 ```
+
