@@ -32,10 +32,25 @@ func (dp DParser) addDays(days int, tim time.Time) time.Time {
 func (dp *DParser) calcDiff(d1, d2 time.Time) (diff tDiff) {
 	dur := d2.Sub(d1)
 	diff.NanoSeconds = dur.Nanoseconds()
-	diff.Seconds = dur.Seconds()
-	diff.Minutes = dur.Seconds() / 60
-	diff.Hours = dur.Seconds() / 3600
-	diff.Days = dur.Seconds() / 86400
 	diff.Readable = dur.String()
+
+	arr := []float64{
+		dur.Seconds(),
+		dur.Seconds() / 60,
+		dur.Seconds() / 3600,
+		dur.Seconds() / 86400,
+	}
+
+	if dp.Round > -1 {
+		for i := 0; i <= len(arr)-1; i++ {
+			arr[i] = dp.roundFloat(arr[i], uint(dp.Round))
+		}
+	}
+
+	diff.Seconds = arr[0]
+	diff.Minutes = arr[1]
+	diff.Hours = arr[2]
+	diff.Days = arr[3]
+
 	return
 }

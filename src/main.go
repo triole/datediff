@@ -2,13 +2,12 @@ package main
 
 import (
 	"datediff/dparser"
-	"fmt"
 )
 
 func main() {
 	parseArgs()
 
-	dp := dparser.Init(CLI.Date1, CLI.Date2, CLI.TOML)
+	dp := dparser.Init(CLI.Date1, CLI.Date2, CLI.Round, CLI.TOML)
 
 	if CLI.Formats == true {
 		dp.ListSupportedFormats()
@@ -25,7 +24,7 @@ func main() {
 		}
 
 		if CLI.Verbose == false && CLI.JSON == false && CLI.TOML == false {
-			fmt.Printf("%s\n", dp.Output.Diff.Readable)
+			dp.PrintShort(CLI.Print)
 		}
 	}
 }

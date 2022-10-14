@@ -11,7 +11,7 @@ func TestTodayTomorrowYesterday(t *testing.T) {
 }
 
 func assertCalcDiff(d1, d2 string, expMin float64, t *testing.T) {
-	dp := Init(d1, d2, false)
+	dp := Init(d1, d2, -1, false)
 	dp.Parse()
 	if dp.Output.Diff.Minutes != expMin {
 		t.Errorf(

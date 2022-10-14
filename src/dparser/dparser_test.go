@@ -12,10 +12,10 @@ func TestDetectLayout(t *testing.T) {
 	assertDetectLayout("12-31", "01-02", t)
 }
 
-func assertDetectLayout(input, exp string, t *testing.T) {
-	dp := Init(input, "", false)
+func assertDetectLayout(d1, exp string, t *testing.T) {
+	dp := Init(d1, "", -1, false)
 	dp.Parse()
-	if dp.detectLayout(input) != exp {
-		t.Errorf("Fail DetectLayout: %s != %s", input, exp)
+	if dp.detectLayout(d1) != exp {
+		t.Errorf("Fail DetectLayout: %s != %s", d1, exp)
 	}
 }

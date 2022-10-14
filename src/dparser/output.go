@@ -34,6 +34,23 @@ func (dp DParser) printTOML(obj interface{}) {
 	fmt.Println(string(toml))
 }
 
+func (dp DParser) PrintShort(format string) {
+	switch format {
+	case "readable":
+		fmt.Printf("%s\n", dp.Output.Diff.Readable)
+	case "nano":
+		fmt.Printf("%d\n", dp.Output.Diff.NanoSeconds)
+	case "sec":
+		fmt.Printf("%f\n", dp.Output.Diff.Seconds)
+	case "min":
+		fmt.Printf("%f\n", dp.Output.Diff.Minutes)
+	case "hours":
+		fmt.Printf("%f\n", dp.Output.Diff.Hours)
+	case "days":
+		fmt.Printf("%f\n", dp.Output.Diff.Days)
+	}
+}
+
 func (dp DParser) ListSupportedFormats() {
 	fmt.Printf("\nThe following date layouts are supported\n\n")
 	t := initTable()
