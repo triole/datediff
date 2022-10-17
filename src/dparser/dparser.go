@@ -28,47 +28,47 @@ func (dp *DParser) Parse() {
 		case "tomorrow":
 			dp.Output.Dates[i] = dp.timeToParserDate(dp.tomorrow(), nil)
 		case "next_monday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.now(), "monday"), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.today(), "monday"), nil)
 		case "next_tuesday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.now(), "tuesday"), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.today(), "tuesday"), nil)
 		case "next_wednesday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.now(), "wednesday"), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.today(), "wednesday"), nil)
 		case "next_thursday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.now(), "thursday"), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.today(), "thursday"), nil)
 		case "next_friday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.now(), "friday"), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.today(), "friday"), nil)
 		case "next_saturday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.now(), "saturday"), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.today(), "saturday"), nil)
 		case "next_sunday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.now(), "sunday"), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDay(dp.today(), "sunday"), nil)
 		case "next_even_monday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "monday", false), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "monday", false), nil)
 		case "next_even_tuesday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "tuesday", false), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "tuesday", false), nil)
 		case "next_even_wednesday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "wednesday", false), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "wednesday", false), nil)
 		case "next_even_thursday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "thursday", false), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "thursday", false), nil)
 		case "next_even_friday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "friday", false), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "friday", false), nil)
 		case "next_even_saturday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "saturday", false), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "saturday", false), nil)
 		case "next_even_sunday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "sunday", false), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "sunday", false), nil)
 		case "next_odd_monday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "monday", true), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "monday", true), nil)
 		case "next_odd_tuesday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "tuesday", true), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "tuesday", true), nil)
 		case "next_odd_wednesday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "wednesday", true), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "wednesday", true), nil)
 		case "next_odd_thursday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "thursday", true), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "thursday", true), nil)
 		case "next_odd_friday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "friday", true), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "friday", true), nil)
 		case "next_odd_saturday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "saturday", true), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "saturday", true), nil)
 		case "next_odd_sunday":
-			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.now(), "sunday", true), nil)
+			dp.Output.Dates[i] = dp.timeToParserDate(dp.nextWeekDayEvenOrOdd(dp.today(), "sunday", true), nil)
 		default:
 			dp.Output.Dates[i].Layout = dp.detectLayout(dp.Output.Dates[i].String)
 			if dp.Output.Dates[i].Layout == "01-02" {
