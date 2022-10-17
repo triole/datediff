@@ -1,6 +1,7 @@
 package dparser
 
 import (
+	"strings"
 	"time"
 )
 
@@ -18,6 +19,27 @@ func (dp DParser) today() (today time.Time) {
 	today = time.Date(
 		n.Year(), n.Month(), n.Day(), 0, 0, 0, 0, dp.TimeZoneLocation,
 	)
+	return
+}
+
+func (dp DParser) nextWeekDay(dat time.Time, weekday string) (nwd time.Time) {
+	for i := 1; i <= 20; i++ {
+		nextDate := dp.addDays(i, dat)
+		if strings.ToLower(nextDate.Weekday().String()) == strings.ToLower(weekday) {
+			nwd = nextDate
+			break
+		}
+	}
+	return
+}
+
+func (dp DParser) nextWeekDayEvenOrOdd(dat time.Time, weekday string, odd bool) (nwd time.Time) {
+	nwd = dp.nextWeekDay(dat, weekday)
+	_, weekno := nwd.ISOWeek()
+	if odd == (weekno%2 == 0) {
+		nwd = dp.nextWeekDay(nwd, weekday)
+		_, weekno = nwd.ISOWeek()
+	}
 	return
 }
 
