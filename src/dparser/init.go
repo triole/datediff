@@ -35,6 +35,7 @@ type tDate struct {
 	String string    `json:"string"`
 	Layout string    `json:"layout"`
 	Date   time.Time `json:"date"`
+	Unix   int64     `json:"unix"`
 }
 
 func Init(date1, date2 string, round int, toml bool) (dp DParser) {

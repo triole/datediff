@@ -79,6 +79,7 @@ func (dp *DParser) Parse() {
 			}
 			dp.Output.Dates[i].Date = dp.stringToDate(dp.Output.Dates[i])
 		}
+		dp.Output.Dates[i].Unix = dp.Output.Dates[i].Date.Unix()
 	}
 	dp.Output.Diff = dp.calcDiff(
 		dp.Output.Dates[0].Date, dp.Output.Dates[1].Date,
