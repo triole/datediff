@@ -3,8 +3,8 @@
 <!--- mdtoc: toc begin -->
 
 1. [Synopsis](#synopsis)
-1. [Examples](#examples)
-1. [Help](#help)<!--- mdtoc: toc end -->
+2. [Examples](#examples)
+3. [Help](#help)<!--- mdtoc: toc end -->
 
 ## Synopsis
 
@@ -34,11 +34,19 @@ $ datediff -j 2022-10-01 2022-10-15
 $ datediff now 2022-12-31
 
 ```go mdox-exec="r now 2022-12-31"
-1859h49m11.644201699s
+1787h54m16.614944778s
 ```
 
 ```go mdox-exec="r today tomorrow"
 24h0m0s
+```
+
+```go mdox-exec="r today next_friday"
+109h5m43.961155549s
+```
+
+```go mdox-exec="r today next_odd_monday"
+181h5m44.22773963s
 ```
 
 ## Help
@@ -48,15 +56,18 @@ $ datediff now 2022-12-31
 a command line date differ
 
 Arguments:
-  [<date-1>]    date1
-  [<date-2>]    date2
+  [<date-1>]    date1, default 'now'
+  [<date-2>]    date2, default 'tomorrow'
 
 Flags:
-  -h, --help            Show context-sensitive help.
-  -j, --json            print diff output in json format
-  -t, --toml            print diff output as toml
-  -l, --formats         list supported date formats
-  -v, --verbose         verbose mode, default format is json, use -t to switch
-  -V, --version-flag    display version
+  -h, --help                Show context-sensitive help.
+  -p, --print="readable"    print format, display diff in a specific unit,
+                            can be: nano,sec,min,hours,days
+  -r, --round=-1            round output values to precision
+  -j, --json                print full diff in json format
+  -t, --toml                print full diff as toml
+  -l, --formats             list supported date formats
+  -v, --verbose             verbose mode, default format is json, use -t to
+                            switch
+  -V, --version-flag        display version
 ```
-
