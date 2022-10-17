@@ -31,6 +31,7 @@ func (dp *DParser) Parse() {
 			), -1,
 		)
 
+		input := dp.Output.Dates[i].Input
 		switch dp.Output.Dates[i].String {
 		case "now":
 			dp.Output.Dates[i] = now
@@ -93,6 +94,7 @@ func (dp *DParser) Parse() {
 			dp.Output.Dates[i].Date = dp.parserDateToTime(dp.Output.Dates[i])
 		}
 		dp.Output.Dates[i].Unix = dp.Output.Dates[i].Date.Unix()
+		dp.Output.Dates[i].Input = input
 	}
 	dp.Output.Diff = dp.calcDiff(
 		dp.Output.Dates[0].Date, dp.Output.Dates[1].Date,
