@@ -35,7 +35,7 @@ func assertNextWeekday(dat, wd, exp string, t *testing.T) {
 		String: dat,
 		Layout: dp.detectLayout(dat),
 	}
-	res := dp.nextWeekDay(dp.stringToDate(inp), wd)
+	res := dp.nextWeekDay(dp.parserDateToTime(inp), wd)
 	expt, _ := time.ParseInLocation("2006-01-02", exp, time.Local)
 	if res != expt {
 		t.Errorf("NextWeekDay fail: %s != %s", res, expt)
@@ -53,7 +53,7 @@ func assertNextWeekdayEvenOrOdd(dat, wd string, even bool, exp string, t *testin
 		String: dat,
 		Layout: dp.detectLayout(dat),
 	}
-	res := dp.nextWeekDayEvenOrOdd(dp.stringToDate(inp), wd, even)
+	res := dp.nextWeekDayEvenOrOdd(dp.parserDateToTime(inp), wd, even)
 	expt, _ := time.ParseInLocation("2006-01-02", exp, time.Local)
 	if res != expt {
 		t.Errorf("NextWeekDay fail: %s != %s", res, expt)

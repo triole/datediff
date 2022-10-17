@@ -32,6 +32,7 @@ type tOutput struct {
 type tDates []tDate
 
 type tDate struct {
+	Input  string    `json:"input"`
 	String string    `json:"string"`
 	Layout string    `json:"layout"`
 	Date   time.Time `json:"date"`
@@ -39,8 +40,8 @@ type tDate struct {
 }
 
 func Init(date1, date2 string, round int, toml bool) (dp DParser) {
-	dp.Output.Dates = addDateString(date1, dp.Output.Dates)
-	dp.Output.Dates = addDateString(date2, dp.Output.Dates)
+	dp.Output.Dates = addToOutputDates(date1, dp.Output.Dates)
+	dp.Output.Dates = addToOutputDates(date2, dp.Output.Dates)
 	zone, err := timezone.Name()
 	if err != nil {
 		log.Fatal(err)
@@ -61,8 +62,8 @@ func Init(date1, date2 string, round int, toml bool) (dp DParser) {
 	return
 }
 
-func addDateString(str string, tdates tDates) tDates {
-	td := tDate{String: str}
+func addToOutputDates(str string, tdates tDates) tDates {
+	td := tDate{Input: str, String: str}
 	tdates = append(tdates, td)
 	return tdates
 }

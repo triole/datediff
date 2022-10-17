@@ -22,6 +22,10 @@ func (dp DParser) today() (today time.Time) {
 	return
 }
 
+func (dp DParser) tomorrow() time.Time {
+	return dp.addDays(1, dp.today())
+}
+
 func (dp DParser) nextWeekDay(dat time.Time, weekday string) (nwd time.Time) {
 	for i := 1; i <= 20; i++ {
 		nextDate := dp.addDays(i, dat)
@@ -43,12 +47,24 @@ func (dp DParser) nextWeekDayEvenOrOdd(dat time.Time, weekday string, odd bool) 
 	return
 }
 
-func (dp DParser) tomorrow() time.Time {
-	return dp.addDays(1, dp.today())
+func (dp DParser) nextYear(dat time.Time) time.Time {
+	return dp.addYears(1, dp.today())
+}
+
+func (dp DParser) lastYear(dat time.Time) time.Time {
+	return dp.addYears(-1, dp.today())
 }
 
 func (dp DParser) addDays(days int, tim time.Time) time.Time {
 	return tim.AddDate(0, 0, days)
+}
+
+func (dp DParser) addMonths(months int, tim time.Time) time.Time {
+	return tim.AddDate(0, months, 0)
+}
+
+func (dp DParser) addYears(years int, tim time.Time) time.Time {
+	return tim.AddDate(years, 0, 0)
 }
 
 func (dp *DParser) calcDiff(d1, d2 time.Time) (diff tDiff) {

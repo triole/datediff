@@ -1,8 +1,8 @@
 package dparser
 
 import (
-	"log"
-	"time"
+	"strconv"
+	"strings"
 )
 
 type tDiff struct {
@@ -18,6 +18,19 @@ func (dp *DParser) Parse() {
 	now := dp.timeToParserDate(dp.now(), nil)
 	for i := 0; i <= len(dp.Output.Dates)-1; i++ {
 		// TODO: improve calling logic
+		dp.Output.Dates[i].String = strings.Replace(
+			dp.Output.Dates[i].String, "next_year",
+			strconv.Itoa(
+				dp.nextYear(dp.Output.Dates[i].Date).Year(),
+			), -1,
+		)
+		dp.Output.Dates[i].String = strings.Replace(
+			dp.Output.Dates[i].String, "last_year",
+			strconv.Itoa(
+				dp.lastYear(dp.Output.Dates[i].Date).Year(),
+			), -1,
+		)
+
 		switch dp.Output.Dates[i].String {
 		case "now":
 			dp.Output.Dates[i] = now
@@ -77,34 +90,11 @@ func (dp *DParser) Parse() {
 					dp.now(), "2006",
 				).String + "-" + dp.Output.Dates[i].String
 			}
-			dp.Output.Dates[i].Date = dp.stringToDate(dp.Output.Dates[i])
+			dp.Output.Dates[i].Date = dp.parserDateToTime(dp.Output.Dates[i])
 		}
 		dp.Output.Dates[i].Unix = dp.Output.Dates[i].Date.Unix()
 	}
 	dp.Output.Diff = dp.calcDiff(
 		dp.Output.Dates[0].Date, dp.Output.Dates[1].Date,
 	)
-}
-
-func (dp DParser) stringToDate(inp tDate) (tim time.Time) {
-	var err error
-	tim, err = time.ParseInLocation(
-		inp.Layout, inp.String, time.Local,
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return
-}
-
-func (dp DParser) timeToParserDate(tim time.Time, lt interface{}) (d tDate) {
-	layout := "2006-01-02T15:04:05"
-	switch lt.(type) {
-	case string:
-		layout = lt.(string)
-	}
-	d.Date = tim
-	d.Layout = layout
-	d.String = tim.Format(layout)
-	return
 }
