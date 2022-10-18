@@ -40,9 +40,9 @@ func (dp DParser) PrintShort(format string) {
 		dp.printVal(dp.Output.Diff.Readable)
 	case "nano":
 		dp.printVal(dp.Output.Diff.NanoSeconds)
-	case "sec":
+	case "seconds":
 		dp.printVal(dp.Output.Diff.Seconds)
-	case "min":
+	case "minutes":
 		dp.printVal(dp.Output.Diff.Minutes)
 	case "hours":
 		dp.printVal(dp.Output.Diff.Hours)
@@ -51,19 +51,8 @@ func (dp DParser) PrintShort(format string) {
 	}
 }
 
-func (dp DParser) printVal(itf interface{}) {
-	switch val := itf.(type) {
-	case int:
-		fmt.Printf("%d\n", val)
-	case float64:
-		if dp.Round == 0 {
-			fmt.Printf("%d\n", int(val))
-		} else {
-			fmt.Printf("%f\n", val)
-		}
-	default:
-		fmt.Printf("%s\n", val)
-	}
+func (dp DParser) printVal(val interface{}) {
+	fmt.Printf("%v\n", val)
 }
 
 func (dp DParser) ListSupportedFormats() {

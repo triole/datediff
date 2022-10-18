@@ -12,15 +12,15 @@ Running date diff calculations in shell can be tedious. This is where this tiny 
 
 ## Examples
 
+```go mdox-exec="sh/dd.sh 2022-10-13T12:00:00 2022-10-15T19:00:00"
 $ datediff 2022-10-13T12:00:00 2022-10-15T19:00:00
 
-```go mdox-exec="r 2022-10-13T12:00:00 2022-10-15T19:00:00"
 55h0m0s
 ```
 
+```go mdox-exec="sh/dd.sh -j 2022-10-01 2022-10-15"
 $ datediff -j 2022-10-01 2022-10-15
 
-```go mdox-exec="r -j 2022-10-01 2022-10-15"
 {
    "nanoseconds": 1209600000000000,
    "seconds": 1209600,
@@ -31,26 +31,34 @@ $ datediff -j 2022-10-01 2022-10-15
 }
 ```
 
+```go mdox-exec="sh/dd.sh now 2022-12-31"
 $ datediff now 2022-12-31
 
-```go mdox-exec="r now 2022-12-31"
-1785h36m10.951313733s
+1769h1m14.37872469s
 ```
 
-```go mdox-exec="r today tomorrow"
-24h0m0s
+```go mdox-exec="sh/dd.sh today tomorrow -p seconds -r 0"
+$ datediff today tomorrow -p seconds -r 0
+
+86400
 ```
 
-```go mdox-exec="r today next_friday"
-96h0m0s
+```go mdox-exec="sh/dd.sh now next_friday -p hours -r 2"
+$ datediff now next_friday -p hours -r 2
+
+64.02
 ```
 
-```go mdox-exec="r today next_odd_monday"
-168h0m0s
+```go mdox-exec="sh/dd.sh today next_odd_monday -p hours"
+$ datediff today next_odd_monday -p hours
+
+144
 ```
 
-```go mdox-exec="r today next_year-11-11 -p days"
-390.041667
+```go mdox-exec="sh/dd.sh today next_year-11-11 -p days"
+$ datediff today next_year-11-11 -p days
+
+389.0416666666667
 ```
 
 ## Help

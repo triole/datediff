@@ -22,7 +22,7 @@ var (
 var CLI struct {
 	Date1       string `help:"date1, default 'now'" arg optional default:now`
 	Date2       string `help:"date2, default 'tomorrow'" arg optional default:tomorrow`
-	Print       string `help:"print format, display diff in a specific unit, can be: nano,sec,min,hours,days" short:p enum:"readable,nano,sec,min,hours,days" default:readable`
+	Print       string `help:"print format, display diff in a specific unit, can be: nano,sec,min,hours,days" short:p enum:"readable,nano,seconds,minutes,hours,days" default:readable`
 	Round       int    `help:"round output values to precision" short:r default:-1`
 	JSON        bool   `help:"print full diff in json format" short:j`
 	TOML        bool   `help:"print full diff as toml" short:t`
