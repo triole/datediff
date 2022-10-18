@@ -24,5 +24,15 @@
         "matcher": "^[0-9]{2}-[0-9]{2}",
         "desc": "MM-DD",
         "comment": "parser assumes date is in current year"
+    },
+    {
+        "layout": "20060102",
+        "matcher": "^[0-9]{8}",
+        "desc": "YYYMMDD"
+    },
+    {
+        "layout": "0102",
+        "matcher": "^[0-9]{4}",
+        "desc": "MMDD"
     }
 ]
