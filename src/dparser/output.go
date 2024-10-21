@@ -58,11 +58,11 @@ func (dp DParser) printVal(val interface{}) {
 func (dp DParser) ListSupportedFormats() {
 	fmt.Printf("\nThe following date layouts are supported\n\n")
 	t := initTable()
-	t.AppendHeader(table.Row{"Format", "Layout", "Comment"})
+	t.AppendHeader(table.Row{"Layout", "Format", "Comment"})
 	for _, el := range dp.Layouts {
 		t.AppendRow(
 			[]interface{}{
-				el.Desc, el.Layout, el.Comment,
+				el.Layout, el.Desc, el.Comment,
 			},
 		)
 	}

@@ -28,11 +28,21 @@
     {
         "layout": "20060102",
         "matcher": "^[0-9]{8}",
-        "desc": "YYYMMDD"
+        "desc": "YYYYMMDD"
     },
     {
         "layout": "0102",
         "matcher": "^[0-9]{4}",
         "desc": "MMDD"
+    },
+    {
+        "layout": "next_monday"
+    },
+    {
+        "layout": "next_tuesday"
+    },
+    {
+        "layout": "next_wednesday"
     }
+
 ]
