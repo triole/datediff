@@ -1,4 +1,4 @@
-# Datediff ![example workflow](https://github.com/triole/datediff/actions/workflows/build.yaml/badge.svg)
+# Datediff ![build](https://github.com/triole/datediff/actions/workflows/build.yaml/badge.svg) ![test](https://github.com/triole/datediff/actions/workflows/test.yaml/badge.svg)
 
 <!-- toc -->
 
